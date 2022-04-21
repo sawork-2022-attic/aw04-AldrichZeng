@@ -11,5 +11,5 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class Item implements Serializable {
     private Product product;
-    private int quantity;
+    private int quantity;//数量
 }

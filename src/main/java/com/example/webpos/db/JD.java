@@ -6,13 +6,16 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Repository;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Repository
 public class JD implements PosDB {
 
@@ -20,6 +23,7 @@ public class JD implements PosDB {
     private List<Product> products = null;
 
     @Override
+    @Cacheable(value="products")
     public List<Product> getProducts() {
         try {
             if (products == null)
@@ -27,10 +31,12 @@ public class JD implements PosDB {
         } catch (IOException e) {
             products = new ArrayList<>();
         }
+        log.info("getProduct in JD");
         return products;
     }
 
     @Override
+    @Cacheable(value="products", key="#productId")//有遍历，耗时，所以添加缓存
     public Product getProduct(String productId) {
         for (Product p : getProducts()) {
             if (p.getId().equals(productId)) {
