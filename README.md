@@ -20,3 +20,5 @@ And it also fetches a product list from jd.com every time a session begins.
 
 Please **write a report** on the performance differences you notices among the above tasks.
 
+实验报告参考链接：https://furry-oviraptor-88a.notion.site/4-Cache-Session-fcc15fb27ebb41fb9e01541712f0314d
+
